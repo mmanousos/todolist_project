@@ -150,6 +150,19 @@ class TodoListTest < MiniTest::Test
     assert_equal(output, @list.to_s)
   end
 
+  def test_to_s_with_due_date
+    @todo2.due_date = Date.new(2018, 12, 31)
+
+    output = <<-OUTPUT.chomp.gsub(/^\s+/, '')
+    ---- Today's Todos ----
+    [ ] Buy milk
+    [ ] Clean room (due: Monday, December 31)
+    [ ] Go to gym
+    OUTPUT
+
+    assert_equal(output, @list.to_s)
+  end
+
   def test_each
     result = []
     @list.each { |todo| result << todo }
